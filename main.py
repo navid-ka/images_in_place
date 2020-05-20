@@ -31,15 +31,14 @@ class VBoxWidget1(BoxLayout):
         app.first_image = img1
         
 
-    def right_half_darker(self):
+    def right_half_darker(self, first_image):
+
         app = App.get_running_app()
         image = SimpleImage(app.first_image)
         for pixel in image:
-            if pixel.x >= image.width // 2:
-                pixel.red *= 0.5
-                pixel.green *= 0.5
-                pixel.blue *= 0.5
-                
+            pixel.red = pixel.red * 1.5
+            pixel.green = pixel.green * 0.7
+            pixel.blue = pixel.blue * 1.5
         app.first_image = image
 
 
