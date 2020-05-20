@@ -9,7 +9,7 @@
             source: app.filename
             filter_one: root.filter_one
 
-# ---------- Button Save Load ----------
+
     
     GridLayout:
         cols: 2
@@ -18,8 +18,8 @@
         size: [1,.25]
         pos: root.pos
         padding:100
-        Label:
-        Label:
+        
+        # ---------- Button Save Load ----------
         Button:
             text: "Upload Image"
             background_color: rgba('A94A64')
@@ -29,11 +29,14 @@
             text: "Save"
             background_color: rgba('A94A64')
             #on_press: root.save_image()
+        # ---------- Filters ----------
+        Label:
+        Label:
         Button:
             id: filter_one
             text: "Darker"
             background_color: rgba('A94A64')
-            on_press: root.filter_one(root.filename.source); print(root.filename.source)
+            on_press: root.filter_one(root.filename.source); print(root.filename.source) 
         Button:
             text: "Lighter"
             background_color: rgba('A94A64')
