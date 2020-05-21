@@ -7,8 +7,7 @@ from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
-from tkinter.filedialog import askopenfilename
-from tkinter import Tk
+
 from simpleimage import SimpleImage
 
 
@@ -18,33 +17,26 @@ LabelBase.register(name='Nunito', fn_regular= 'assets/fonts/Nunito-Regular.ttf',
 
 
 class VBoxWidget(BoxLayout):
-
-
-    def get_image_one(self):
-        
-        '''This method is called by button FileChooser, it opens a FileChooser selects the desired image'''
-        Tk().withdraw()
-        image = askopenfilename(initialdir = "\src\images",title = "Select file",filetypes = (("image files","*.jpg"),("all files","*.*")))  
-        self.filename.source = image
-    
-    def filter_one(self, filename):
-        image = SimpleImage(self.filename.source)
+    image = ObjectProperty(None)
+    def filter_one(self, image):
+        filename = App.get_running_app().filename
+        image = SimpleImage(filename)
         for pixel in image:
             pixel.red = pixel.red * 1.5
             pixel.green = pixel.green * 0.7
             pixel.blue = pixel.blue * 1.5
-
-        image.show()
         
-    def filter_two(self, filename):
-        image = SimpleImage(self.filename.source)
+
+    def filter_two(self, image):
+        filename = App.get_running_app().filename
+        App.get_running_app().filename
+        image = SimpleImage(filename)
         for pixel in image:
             pixel.red = pixel.red  // 2
             pixel.green = pixel.green // 2
             pixel.blue = pixel.blue * 2
 
         image.show()
-
 
 
 class Main(App):

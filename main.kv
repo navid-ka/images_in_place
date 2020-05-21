@@ -1,16 +1,22 @@
 #:import rgba kivy.utils.rgba
+#:import Factory kivy.factory.Factory
+
+<FC@FileChooserListView>:
+    on_selection:
+        print(self.selection)
+    on_submit:
+        app.filename = self.selection[0]
+        self.parent.dismiss()
+<CustomPopUp@ModalView>:
+    FC:
 
 <VBoxWidget>:
-    filename: filename
+    image: image
     # ---------- Display Images----------
     BoxLayout:
         Image:
-            id: filename
+            id: image
             source: app.filename
-            filter_one: root.filter_one
-
-
-    
     GridLayout:
         cols: 2
         rows: 4
@@ -18,12 +24,14 @@
         size: [1,.25]
         pos: root.pos
         padding:100
-        
-        # ---------- Button Save Load ----------
+            # ---------- Button Save Load ----------
         Button:
+            id: btn_popup
             text: "Upload Image"
             background_color: rgba('A94A64')
-            on_press: root.get_image_one()
+            on_release:
+                self.popup = Factory.CustomPopUp()
+                self.popup.open()
 
         Button:
             text: "Save"
@@ -36,10 +44,12 @@
             id: filter_one
             text: "Darker"
             background_color: rgba('A94A64')
-            on_press: root.filter_one(root.filename.source); print(root.filename.source) 
+            on_press: 
+                root.filter_one(image) 
         Button:
+            id: filter_two
             text: "Lighter"
             background_color: rgba('A94A64')
-            on_press: root.filter_two(root.filename.source); print(root.filename.source) 
+            on_press: root.filter_two(image)
 
         Widget:
