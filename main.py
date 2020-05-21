@@ -18,16 +18,16 @@ LabelBase.register(name='Nunito', fn_regular= 'assets/fonts/Nunito-Regular.ttf',
 
 class VBoxWidget(BoxLayout):
     image = ObjectProperty(None)
-    def filter_one(self, image):
+    def filter_one(self, image_widget):
         filename = App.get_running_app().filename
         image = SimpleImage(filename)
         for pixel in image:
             pixel.red = pixel.red * 1.5
             pixel.green = pixel.green * 0.7
             pixel.blue = pixel.blue * 1.5
-        
+        image_widget.reload()
 
-    def filter_two(self, image):
+    def filter_two(self, image_widget):
         filename = App.get_running_app().filename
         App.get_running_app().filename
         image = SimpleImage(filename)
@@ -35,8 +35,8 @@ class VBoxWidget(BoxLayout):
             pixel.red = pixel.red  // 2
             pixel.green = pixel.green // 2
             pixel.blue = pixel.blue * 2
-
-        image.show()
+        image_widget.reload()
+        
 
 
 class Main(App):
