@@ -45,11 +45,12 @@
             text: "Darker"
             background_color: rgba('A94A64')
             on_press: 
-                root.filter_one(image) 
+                root.filter_one(root.image) == True
+                root.image.reload()
         Button:
             id: filter_two
             text: "Lighter"
             background_color: rgba('A94A64')
-            on_press: root.filter_two(image)
+            on_press: root.filter_two(image) == False
 
         Widget:
