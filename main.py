@@ -37,7 +37,7 @@ class VBoxWidget(BoxLayout):
         self.source_image.source = "images/new_image.png"
         self.source_image.reload()
 
-    def filter_two(self, image_widget):
+    def filter_two(self, source_image):
         source_image = App.get_running_app().source_image
         image = SimpleImage(source_image)
         for pixel in image:
