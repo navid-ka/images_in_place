@@ -34,7 +34,9 @@ class VBoxWidget(BoxLayout):
             pixel.red = pixel.red * 1.5
             pixel.green = pixel.green * 0.7
             pixel.blue = pixel.blue * 1.5
-            
+
+        image.show()
+
 
 
 class Main(App):
