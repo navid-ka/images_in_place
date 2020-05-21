@@ -5,18 +5,19 @@
     on_selection:
         print(self.selection)
     on_submit:
-        app.filename = self.selection[0]
+        app.source_image = self.selection[0]
         self.parent.dismiss()
+
 <CustomPopUp@ModalView>:
     FC:
 
 <VBoxWidget>:
-    image: image
+    source_image: source_image
     # ---------- Display Images----------
     BoxLayout:
         Image:
-            id: image
-            source: app.filename
+            id: source_image
+            source: app.source_image
     GridLayout:
         cols: 2
         rows: 4
@@ -36,7 +37,7 @@
         Button:
             text: "Save"
             background_color: rgba('A94A64')
-            #on_press: root.save_image()
+            on_press: 
         # ---------- Filters ----------
         Label:
         Label:
@@ -45,12 +46,12 @@
             text: "Darker"
             background_color: rgba('A94A64')
             on_press: 
-                root.filter_one(root.image) == True
-                root.image.reload()
+                root.filter_one(root.source_image)
+
         Button:
             id: filter_two
             text: "Lighter"
             background_color: rgba('A94A64')
-            on_press: root.filter_two(image) == False
+            on_press: root.filter_two(root.source_image)
 
         Widget:

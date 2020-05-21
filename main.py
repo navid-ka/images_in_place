@@ -18,38 +18,40 @@ LabelBase.register(name='Nunito', fn_regular= 'assets/fonts/Nunito-Regular.ttf',
 
 
 class VBoxWidget(BoxLayout):
+    def __init__(self, **kwargs):
+        # make sure we aren't overriding any important functionality
+        super(VBoxWidget, self).__init__(**kwargs)
 
-    image = ObjectProperty(None)
 
-    def filter_one(self, image_widget):
-        filename = App.get_running_app().filename
-        image = SimpleImage(filename)
+    def filter_one(self, source_image):
+        
+        source_image = App.get_running_app().source_image
+        image = SimpleImage(source_image)
+        
         for pixel in image:
             pixel.red = pixel.red * 1.5
             pixel.green = pixel.green * 0.7
             pixel.blue = pixel.blue * 1.5
-
-        new_image = image.pil_image.save("images/new_image.png")
-        filename = new_image
-
+        image.pil_image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
 
     def filter_two(self, image_widget):
-        filename = App.get_running_app().filename
-        image = SimpleImage(filename)
+        source_image = App.get_running_app().source_image
+        image = SimpleImage(source_image)
         for pixel in image:
             pixel.red = pixel.red  // 2
             pixel.green = pixel.green // 2
             pixel.blue = pixel.blue * 2
-
-        new_image = image.pil_image.save("images/new_image.png")
-        filename = new_image
-
-
+        image.pil_image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
 
 class Main(App):
-    filename = StringProperty('images/logo.png')
-    filter_one = BooleanProperty(False)
-    filter_two = BooleanProperty(False)
+    source_image = StringProperty('images/logo.png')
+
     def build(self):
         Window.size = (1440 ,810)
         return VBoxWidget()
