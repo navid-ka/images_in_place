@@ -28,12 +28,20 @@ class VBoxWidget(BoxLayout):
         self.filename.source = image
     
     def filter_one(self, filename):
-        
         image = SimpleImage(self.filename.source)
         for pixel in image:
             pixel.red = pixel.red * 1.5
             pixel.green = pixel.green * 0.7
             pixel.blue = pixel.blue * 1.5
+
+        image.show()
+        
+    def filter_two(self, filename):
+        image = SimpleImage(self.filename.source)
+        for pixel in image:
+            pixel.red = pixel.red  // 2
+            pixel.green = pixel.green // 2
+            pixel.blue = pixel.blue * 2
 
         image.show()
 
