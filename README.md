@@ -1,6 +1,6 @@
 # images_in_place
 
-WIP filters not working yet.
+Filters and Sliders working correctly.
 
 ## Instalation guide
 
