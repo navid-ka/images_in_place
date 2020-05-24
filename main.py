@@ -14,9 +14,6 @@ import sys
 LabelBase.register(name='Nunito', fn_regular= 'assets/fonts/Nunito-Regular.ttf',
     fn_bold= 'assets/fonts/Nunito-Bold.ttf')
 
-
-
-
 class VBoxWidget(BoxLayout):
     def __init__(self, **kwargs):
         # make sure we aren't overriding any important functionality
@@ -51,11 +48,8 @@ class VBoxWidget(BoxLayout):
         self.source_image.reload()
 
     def filter_four(self, source_image, *args):
-        
         source_image = App.get_running_app().source_image
-        image = Image.open(source_image)
-        enhance_value = (args[1])
-        image = ImageEnhance.Brightness(image).enhance(enhance_value)
+        image = Image.open(source_image).convert('1')
         image.save("images/new_image.png")
         image = "images/new_image.png"
         self.source_image.source = "images/new_image.png"

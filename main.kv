@@ -3,6 +3,7 @@
 
 
 <FC@FileChooserListView>:
+
     on_selection:
         print(self.selection)
     on_submit:
@@ -64,10 +65,10 @@
             background_color: rgba('A94A64')
             on_press: root.filter_three(root.source_image)
         Button:
-            id: filter_three
-            text: "Gray"
+            id: filter_four
+            text: "Dither"
             background_color: rgba('A94A64')
-            on_press: root.filter_three(root.source_image)
+            on_press: root.filter_four(root.source_image)
 
         Slider:
             id: slider
