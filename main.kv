@@ -1,6 +1,7 @@
 #:import rgba kivy.utils.rgba
 #:import Factory kivy.factory.Factory
 
+
 <FC@FileChooserListView>:
     on_selection:
         print(self.selection)
@@ -13,6 +14,7 @@
 
 <VBoxWidget>:
     source_image: source_image
+
     # ---------- Display Images----------
     BoxLayout:
         Image:
@@ -20,7 +22,7 @@
             source: app.source_image
     GridLayout:
         cols: 2
-        rows: 4
+        rows: 8
         orientation: "horizontal"
         size: [1,.25]
         pos: root.pos
@@ -33,17 +35,19 @@
             on_release:
                 self.popup = Factory.CustomPopUp()
                 self.popup.open()
-
-        Button:
-            text: "Save"
-            background_color: rgba('A94A64')
-            on_press: 
+        Label:
+            text: "Images_in_place"
+            font_name: "Nunito"
+            font_size: 32
+            bold: True
+            color: rgba('A94A64')
+            size_hint_y: 0.1
         # ---------- Filters ----------
         Label:
         Label:
         Button:
             id: filter_one
-            text: "Darker"
+            text: "Contrast Enhance"
             background_color: rgba('A94A64')
             on_press: 
                 root.filter_one(root.source_image)
@@ -53,5 +57,45 @@
             text: "Lighter"
             background_color: rgba('A94A64')
             on_press: root.filter_two(root.source_image)
+
+        Button:
+            id: filter_three
+            text: "Gray"
+            background_color: rgba('A94A64')
+            on_press: root.filter_three(root.source_image)
+        Button:
+            id: filter_three
+            text: "Gray"
+            background_color: rgba('A94A64')
+            on_press: root.filter_three(root.source_image)
+
+        Slider:
+            id: slider
+            min: 1.0
+            max: 5.0
+            step: 0.5
+            orientation: 'horizontal'
+            on_value: root.slider_one(root.source_image, *args)
+        Label:
+            text: "Adjust Brightness"
+        
+        Slider:
+            id: slider
+            min: 0.0
+            max: 30.0
+            step: 0.5
+            orientation: 'horizontal'
+            on_value: root.slider_two(root.source_image, *args)
+        Label:
+            text: "Adjust Color"
+        Slider:
+            id: slider
+            min: 0.0
+            max: 100
+            step: 0.5
+            orientation: 'horizontal'
+            on_value: root.slider_three(root.source_image, *args)
+        Label:
+            text: "Adjust Sharpness"
 
         Widget:

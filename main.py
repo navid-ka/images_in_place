@@ -6,10 +6,8 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
-from kivy.core.image import Image as CoreImage
-import PIL
-
-from simpleimage import SimpleImage
+from PIL import Image, ImageEnhance
+import sys
 
 
 
@@ -17,34 +15,80 @@ LabelBase.register(name='Nunito', fn_regular= 'assets/fonts/Nunito-Regular.ttf',
     fn_bold= 'assets/fonts/Nunito-Bold.ttf')
 
 
+
+
 class VBoxWidget(BoxLayout):
     def __init__(self, **kwargs):
         # make sure we aren't overriding any important functionality
         super(VBoxWidget, self).__init__(**kwargs)
 
-
     def filter_one(self, source_image):
         
         source_image = App.get_running_app().source_image
-        image = SimpleImage(source_image)
-        
-        for pixel in image:
-            pixel.red = pixel.red * 1.5
-            pixel.green = pixel.green * 0.7
-            pixel.blue = pixel.blue * 1.5
-        image.pil_image.save("images/new_image.png")
+        image = Image.open(source_image)
+        enhance_value = 1.5
+        image = ImageEnhance.Contrast(image).enhance(enhance_value)
+        image.save("images/new_image.png")
         image = "images/new_image.png"
         self.source_image.source = "images/new_image.png"
         self.source_image.reload()
 
     def filter_two(self, source_image):
         source_image = App.get_running_app().source_image
-        image = SimpleImage(source_image)
-        for pixel in image:
-            pixel.red = pixel.red  // 2
-            pixel.green = pixel.green // 2
-            pixel.blue = pixel.blue * 2
-        image.pil_image.save("images/new_image.png")
+        image = Image.open(source_image)
+        image = ImageEnhance.Brightness(image).enhance(1.5)
+        image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
+
+    def filter_three(self, source_image):
+        source_image = App.get_running_app().source_image
+        image = Image.open(source_image).convert('L')
+        image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
+
+    def filter_four(self, source_image, *args):
+        
+        source_image = App.get_running_app().source_image
+        image = Image.open(source_image)
+        enhance_value = (args[1])
+        image = ImageEnhance.Brightness(image).enhance(enhance_value)
+        image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
+
+    def slider_one(self, source_image, *args):
+        
+        source_image = App.get_running_app().source_image
+        image = Image.open(source_image)
+        enhance_value = (args[1])
+        image = ImageEnhance.Brightness(image).enhance(enhance_value)
+        image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
+
+    def slider_two(self, source_image, *args):
+        
+        source_image = App.get_running_app().source_image
+        image = Image.open(source_image)
+        enhance_value = (args[1])
+        image = ImageEnhance.Color(image).enhance(enhance_value)
+        image.save("images/new_image.png")
+        image = "images/new_image.png"
+        self.source_image.source = "images/new_image.png"
+        self.source_image.reload()
+    def slider_three(self, source_image, *args):
+        
+        source_image = App.get_running_app().source_image
+        image = Image.open(source_image)
+        enhance_value = (args[1])
+        image = ImageEnhance.Sharpness(image).enhance(enhance_value)
+        image.save("images/new_image.png")
         image = "images/new_image.png"
         self.source_image.source = "images/new_image.png"
         self.source_image.reload()
